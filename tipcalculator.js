@@ -1,42 +1,47 @@
-let billInput = document.querySelector("#billamount");
-let tipInput = document.querySelector("#tippercentage");
-let otherTipInput = document.querySelector("#othertipamount");
-// let button = document.querySelector("#calculate");
+function billAmount() {
+//associate the bill amount entered by the user with billAmount variable
+  let billAmount = Number(document.getElementById("billamount").value);
 
-function calculateTip() {
-  // debugger;
-  var billAmount = Number(document.getElementById("billamount").value);
-  var tipPercentage = Number(document.getElementById("tippercentage").value);
+//print entered bill amount with a dollar sign underneath the input box
+  document.getElementById("bill").innerHTML = "$" + billAmount + " + ";
 
-      var otherTipAmount = Number(document.getElementById("othertipamount").value);
-
-  var textBox = Number(document.getElementById("billamount").value);
-
-  var total = (billAmount * tipPercentage);
-
-        var otherTotal = (otherTipAmount / 100) * billAmount;
-
-  var totalBill = (total + billAmount);
-
-        var otherTotalBill = (otherTotal + billAmount);
-
-  document.getElementById("bill").innerText = "$" + billAmount  + " + ";
-
-  document.getElementById("tip").innerHTML = "$" + total + " = ";
-
-        document.getElementById("tipother").innerHTML = "$" + otherTotal + " = ";
-
-  document.getElementById("totalDue").innerText = "$" + totalBill;
-
-        document.getElementById("otherTotalDue").innerText = "$" + otherTotalBill;
+  return billAmount;
 };
 
+function tipAmount() {
+  let billAmount = Number(document.getElementById("billamount").value);
+  let tipPercent = Number(document.getElementById("tippercentage").value);
+  let tipAmount = (billAmount * tipPercent);
+
+  document.getElementById("tip").innerHTML = "$" + tipAmount + " = ";
+
+  return tipAmount;
+};
+
+function totalAmount() {
+  let billAmount = Number(document.getElementById("billamount").value);
+  let tipPercent = Number(document.getElementById("tippercentage").value);
+  let tipAmount = (billAmount * tipPercent);
+  let totalCalcAmount = (billAmount + tipAmount);
+
+  document.getElementById("total").innerHTML = "$" + totalCalcAmount;
+
+  return totalCalcAmount;
+};
+
+
+//listen for the user's bill amount and output it automatically and CALLS the function
+let billInput = document.querySelector("#billamount");
+let totalInput = document.querySelector("#total");
 billInput.addEventListener('input', function() {
-  calculateTip();
+  billAmount();
+  totalAmount();
+  tipAmount();
 });
+
+let tipInput = document.querySelector("#tippercentage");
 tipInput.addEventListener('input', function() {
-  calculateTip();
-});
-otherTipInput.addEventListener('input', function() {
-  calculateTip();
+  tipAmount();
+  billAmount();
+  totalAmount();
 });
